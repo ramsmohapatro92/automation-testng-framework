@@ -1,0 +1,27 @@
+Index page:
+sign in: //a[contains(text(),'Sign in')]
+
+Sign in Page
+Email: //input[@id='email_create']
+submit: //button[@id='SubmitCreate']
+
+CreateAccount Page
+Title
+Mr. ://input[@id='id_gender1']
+Mrs.: //input[@id='id_gender2']
+First Name: //input[@id='customer_firstname']
+last Name: //input[@id='customer_lastname']
+Password: //input[@id='passwd']
+
+Date of Birth:
+Day: //select[@id='days']
+Month: //select[@id='months']
+Year: //select[@id='years']
+
+Company: //input[@id='company']
+Address: //input[@id='address1']
+City: //input[@id='city']
+State; //select[@id='id_state']
+Postal Code: //input[@id='postcode']
+Country: //select[@id='id_country']
+Mobile Phone: //input[@id='phone_mobile']
