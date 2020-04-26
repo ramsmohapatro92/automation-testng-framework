@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.automationpractice.Utilites.TestUtilities;
 
-
 public class TestBase {
 
 	public static WebDriver driver;
@@ -26,9 +25,24 @@ public class TestBase {
 	public static Select selectdropdown;
 	public static Logger log = Logger.getLogger(TestBase.class);
 
-//	public TestBase() {
+	public TestBase() {
+		File propertiesfile = new File(".\\BuildDetails.properties");
+		//System.out.println(propertiesfile.getAbsolutePath());
+		try {
+			fis = new FileInputStream(propertiesfile);
+			try {
+				prop.load(fis);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void initialization() {
 //		File propertiesfile = new File(".\\BuildDetails.properties");
-//		//System.out.println(propertiesfile.getAbsolutePath());
 //		try {
 //			fis = new FileInputStream(propertiesfile);
 //			try {
@@ -39,23 +53,6 @@ public class TestBase {
 //		} catch (FileNotFoundException e) {
 //			e.printStackTrace();
 //		}
-//
-//	}
-
-	public static void initialization() {
-		File propertiesfile = new File(".\\BuildDetails.properties");
-		try {
-			fis = new FileInputStream(propertiesfile);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try {
-			prop.load(fis);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		browsername = prop.getProperty("browser");
 		String url = prop.getProperty("url");
 		switch (browsername) {
@@ -79,40 +76,36 @@ public class TestBase {
 		driver.manage().timeouts().implicitlyWait(TestUtilities.page_load_timeout, TimeUnit.SECONDS);
 		driver.manage().timeouts().pageLoadTimeout(TestUtilities.implicitly_wait, TimeUnit.SECONDS);
 		driver.get(url);
-		log.info(url+ " :is launched");
+		log.info(url + " :is launched");
 	}
-	
-	public static void clickonbtn(WebElement element)
-	{
+
+	public static void clickonbtn(WebElement element) {
 		element.click();
-		log.info(element+" "+ "has been clicked");
+		log.info(element + " " + "has been clicked");
 	}
-	
-	public static void setTextValue(WebElement element, String value)
-	{
+
+	public static void setTextValue(WebElement element, String value) {
 		element.clear();
 		element.sendKeys(value);
-		log.info("Value entered: "+value);
+		log.info("Value entered: " + value);
 	}
-	
 
 	public static void selectbyVisibleText(WebElement element, String value) {
 		selectdropdown = new Select(element);
 		selectdropdown.selectByVisibleText(value);
-		log.info("Value enterd: "+value);
+		log.info("Value enterd: " + value);
 	}
 
-	public static void selectbyVisibleText(WebElement element, int value) {
+	public static void selectbyIndex(WebElement element, int value) {
 		selectdropdown = new Select(element);
 		selectdropdown.selectByIndex(value);
-		log.info("Value enterd: "+value);
+		log.info("Value enterd: " + value);
 	}
-	
-	public static void selectbyValue(WebElement element, String value)
-	{
+
+	public static void selectbyValue(WebElement element, String value) {
 		selectdropdown = new Select(element);
 		selectdropdown.selectByVisibleText(value);
-		log.info("Value enterd: "+value);
+		log.info("Value enterd: " + value);
 	}
 
 	public static void tearDown() {

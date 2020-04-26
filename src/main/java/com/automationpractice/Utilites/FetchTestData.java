@@ -11,7 +11,7 @@ public class FetchTestData {
 	
 	static Xls_Reader reader;
 	
-	public static String excelPath=".\\Test_Data_Repo.xlsx";
+	public static String excelPath="E:\\RAM S MOHAPATRO\\Infy Project\\com.automationpractice.qa\\Test Data\\Test_Data_Repo.xlsx";
 	
 	public static ArrayList<Object[]> getTestDataFromExcel()
 	{

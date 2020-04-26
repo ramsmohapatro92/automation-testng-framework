@@ -15,6 +15,11 @@ public class IndexPageTest extends TestBase {
 	Indexpage indexpageobj;
 	SignInPage signinpageob;
 	Logger log = Logger.getLogger(IndexPageTest.class);
+	
+	IndexPageTest()
+	{
+		super();
+	}
 
 	@BeforeMethod
 	public void setup() {

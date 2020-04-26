@@ -27,7 +27,7 @@ public class SignInPageTest extends TestBase{
 	}
 	
 	@Test
-	public void inputEmail(String email)
+	public void inputEmail()
 	{
 		String emailid=prop.getProperty("emailid1");
 		setTextValue(signinpageobj.getemailID(), emailid);
