@@ -25,3 +25,8 @@ State; //select[@id='id_state']
 Postal Code: //input[@id='postcode']
 Country: //select[@id='id_country']
 Mobile Phone: //input[@id='phone_mobile']
+
+
+<class name="com.automationpractice.testcases.IndexPageTest"/>
+      <class name="com.automationpractice.testcases.SignInPageTest"/>
+      <class name="com.automationpractice.testcases.CreateAccountPageTest"/>

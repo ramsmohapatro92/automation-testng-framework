@@ -11,11 +11,13 @@ import org.testng.annotations.Test;
 
 import com.automationpractice.Utilites.FetchTestData;
 import com.automationpractice.pages.CreateAccountPage;
+import com.automationpractice.pages.Indexpage;
 import com.automationpractice.pages.SignInPage;
 import com.automationpractice.qa.TestBase;
 
 public class SignInPageTest extends TestBase{
 
+	Indexpage indexpageobj;
 	SignInPage signinpageobj;
 	CreateAccountPage createaccountpageobj;
 	
@@ -24,6 +26,13 @@ public class SignInPageTest extends TestBase{
 	{
 		initialization();
 		signinpageobj= new SignInPage();
+		indexpageobj= new Indexpage();
+	}
+	
+	@Test
+	public void clickSigninLink()
+	{
+		signinpageobj=indexpageobj.clickSignIn();
 	}
 	
 	@Test
@@ -34,7 +43,7 @@ public class SignInPageTest extends TestBase{
 		createaccountpageobj=signinpageobj.submitEmailID();
 	}
 	
-	@AfterTest
+	@AfterTest(alwaysRun=false)
 	public void tearDowntest()
 	{
 		tearDown();

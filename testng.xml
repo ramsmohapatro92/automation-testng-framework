@@ -3,9 +3,6 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="com.automationpractice.testcases.IndexPageTest"/>
-      <class name="com.automationpractice.testcases.SignInPageTest"/>
-      <class name="com.automationpractice.testcases.CreateAccountPageTest"/>
       <class name="com.automationpractice.testcases.MyAccountPageTest"/>
     </classes>
   </test> <!-- Test -->

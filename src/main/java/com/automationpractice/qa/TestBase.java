@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -12,7 +13,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.automationpractice.Utilites.TestUtilities;
 
@@ -24,10 +27,11 @@ public class TestBase {
 	static String browsername;
 	public static Select selectdropdown;
 	public static Logger log = Logger.getLogger(TestBase.class);
+	public static WebDriverWait explicitwait;
 
 	public TestBase() {
 		File propertiesfile = new File(".\\BuildDetails.properties");
-		//System.out.println(propertiesfile.getAbsolutePath());
+		prop = new Properties();
 		try {
 			fis = new FileInputStream(propertiesfile);
 			try {
@@ -42,19 +46,8 @@ public class TestBase {
 	}
 
 	public static void initialization() {
-//		File propertiesfile = new File(".\\BuildDetails.properties");
-//		try {
-//			fis = new FileInputStream(propertiesfile);
-//			try {
-//				prop.load(fis);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		} catch (FileNotFoundException e) {
-//			e.printStackTrace();
-//		}
 		browsername = prop.getProperty("browser");
-		String url = prop.getProperty("url");
+		String url = prop.getProperty("URL");
 		switch (browsername) {
 
 		case "chrome":
@@ -62,13 +55,13 @@ public class TestBase {
 			driver = new ChromeDriver();
 			log.info("Launching Chrome browser");
 
-		case "firefox":
-			System.setProperty("webdriver.gecko.driver", ".\\Driver\\geckodriver.exe");
-			driver = new FirefoxDriver();
-			log.info("Launching firefox browser");
-
-		default:
-			System.out.println("Not a valid web driver");
+//		case "firefox":
+//			System.setProperty("webdriver.gecko.driver", ".\\Driver\\geckodriver.exe");
+//			driver = new FirefoxDriver();
+//			log.info("Launching firefox browser");
+//
+//		default:
+//			System.out.println("Not a valid web driver");
 
 		}
 		driver.manage().window().maximize();
@@ -111,6 +104,12 @@ public class TestBase {
 	public static void tearDown() {
 		driver.close();
 		log.info("Session ended");
+	}
+	
+	public static void waitforElement(WebDriver driver, WebElement element)
+	{
+		explicitwait= new WebDriverWait(driver,TestUtilities.explicitly_wait);
+		element=explicitwait.until(ExpectedConditions.visibilityOf(element));
 	}
 
 }

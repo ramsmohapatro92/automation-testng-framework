@@ -25,6 +25,7 @@ public class IndexPageTest extends TestBase {
 	public void setup() {
 		initialization();
 		indexpageobj = new Indexpage();
+		
 	}
 	
 	@Test
@@ -33,7 +34,7 @@ public class IndexPageTest extends TestBase {
 		signinpageob=indexpageobj.clickSignIn();
 	}
 
-	@AfterTest
+	@AfterTest(alwaysRun=false)
 	public void tearDowntest() {
 		tearDown();
 	}

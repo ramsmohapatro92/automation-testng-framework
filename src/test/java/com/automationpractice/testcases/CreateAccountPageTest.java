@@ -13,23 +13,43 @@ import org.testng.annotations.Test;
 
 import com.automationpractice.Utilites.FetchTestData;
 import com.automationpractice.pages.CreateAccountPage;
+import com.automationpractice.pages.Indexpage;
 import com.automationpractice.pages.MyAccountPage;
+import com.automationpractice.pages.SignInPage;
 
 public class CreateAccountPageTest extends TestBase {
 
 	CreateAccountPage createaccountpageobj;
 	MyAccountPage myaccountpageobj;
 
+	Indexpage indexpageobj;
+	SignInPage signinpageobj;
+
 	@BeforeMethod
 	public void setup() {
 		initialization();
 		createaccountpageobj = new CreateAccountPage();
+		signinpageobj = new SignInPage();
+		indexpageobj = new Indexpage();
+
 	}
 
 	@DataProvider
 	public Iterator<Object[]> getTestData() {
 		ArrayList<Object[]> testData = FetchTestData.getTestDataFromExcel();
 		return testData.iterator();
+	}
+
+	@Test
+	public void clickSigninLink() {
+		signinpageobj = indexpageobj.clickSignIn();
+	}
+
+	@Test
+	public void inputEmail() {
+		String emailid = prop.getProperty("emailid1");
+		setTextValue(signinpageobj.getemailID(), emailid);
+		createaccountpageobj = signinpageobj.submitEmailID();
 	}
 
 	@Test(dataProvider = "getTestData")
@@ -51,26 +71,25 @@ public class CreateAccountPageTest extends TestBase {
 		} else {
 			createaccountpageobj.getFemalegender().sendKeys(title);
 		}
-		
-		
-		setTextValue(createaccountpageobj.getFirstname(),firstname);
-		setTextValue(createaccountpageobj.getLastname(),lastname);
-		setTextValue(createaccountpageobj.getPassword(),password);
-		selectbyVisibleText(createaccountpageobj.getDay(),day);
-		selectbyVisibleText(createaccountpageobj.getMonth(),month);
-		selectbyVisibleText(createaccountpageobj.getYear(),year);
-		setTextValue(createaccountpageobj.getCompanyname(),companyname);
-		setTextValue(createaccountpageobj.getAddressline(),addressline);
+
+		setTextValue(createaccountpageobj.getFirstname(), firstname);
+		setTextValue(createaccountpageobj.getLastname(), lastname);
+		setTextValue(createaccountpageobj.getPassword(), password);
+		selectbyVisibleText(createaccountpageobj.getDay(), day);
+		selectbyVisibleText(createaccountpageobj.getMonth(), month);
+		selectbyVisibleText(createaccountpageobj.getYear(), year);
+		setTextValue(createaccountpageobj.getCompanyname(), companyname);
+		setTextValue(createaccountpageobj.getAddressline(), addressline);
 		setTextValue(createaccountpageobj.getCityname(), cityname);
 		setTextValue(createaccountpageobj.getStatename(), statename);
 		setTextValue(createaccountpageobj.getPostalcode(), postalcode);
 		setTextValue(createaccountpageobj.getCountry(), country);
 		setTextValue(createaccountpageobj.getMobilenumber(), mobilenumber);
-		myaccountpageobj=createaccountpageobj.submitPersonalinfo();
+		myaccountpageobj = createaccountpageobj.submitPersonalinfo();
 
 	}
 
-	@AfterTest
+	@AfterTest(alwaysRun = false)
 	public void tearDowntest() {
 		tearDown();
 	}
